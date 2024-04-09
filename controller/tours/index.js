@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const toursFilePath = `${__dirname}/../dev-data/data/tours-simple.json`;
+const toursFilePath = `${__dirname}/../../dev-data/data/tours-simple.json`;
 const tours = JSON.parse(fs.readFileSync(toursFilePath));
 
 const getTours = (req, res) => {
@@ -46,9 +46,14 @@ const getTourById = (req, res) => {
     },
   });
 };
+const updateTour = () => {};
+
+const deleteTour = () => {};
 
 module.exports = {
   getTourById,
   getTours,
   postTour,
+  updateTour,
+  deleteTour,
 };
