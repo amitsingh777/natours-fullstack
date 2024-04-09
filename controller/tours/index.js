@@ -3,6 +3,20 @@ const fs = require('fs');
 const toursFilePath = `${__dirname}/../../dev-data/data/tours-simple.json`;
 const tours = JSON.parse(fs.readFileSync(toursFilePath));
 
+const checkId = (req, res, next, val) => {
+  console.log(val, 'ID ');
+  const tour = tours.find((t) => t.id === val * 1);
+  if (!tour) {
+    return res.status(404).json({
+      status: 'Not Found',
+      data: {
+        tour: {},
+      },
+    });
+  }
+  next();
+};
+
 const getTours = (req, res) => {
   res.status(200).send({
     status: 'success',
@@ -31,14 +45,7 @@ const postTour = (req, res) => {
 
 const getTourById = (req, res) => {
   const tour = tours.find((t) => t.id === req.params.id * 1);
-  if (!tour) {
-    res.status(404).json({
-      status: 'Not Found',
-      data: {
-        tour: {},
-      },
-    });
-  }
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -56,4 +63,5 @@ module.exports = {
   postTour,
   updateTour,
   deleteTour,
+  checkId,
 };
