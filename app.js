@@ -5,7 +5,7 @@ const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 
 const app = express();
-
+app.use(express.static(`${__dirname}/public`));
 app.use(morgan('dev'));
 app.use(express.json());
 

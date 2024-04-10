@@ -16,6 +16,15 @@ const checkId = (req, res, next, val) => {
   }
   next();
 };
+const checkValidTour = (req, res, next) => {
+  if (!(req.body.name && req.body.price)) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Bad Request!',
+    });
+  }
+  next();
+};
 
 const getTours = (req, res) => {
   res.status(200).send({
@@ -64,4 +73,5 @@ module.exports = {
   updateTour,
   deleteTour,
   checkId,
+  checkValidTour,
 };
